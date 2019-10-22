@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Liby99/javascript-tokenizer/issues"
   },
-  "homepage": "https://github.com/Liby99/javascript-tokenizer#readme"
+  "homepage": "https://github.com/Liby99/javascript-tokenizer#readme",
+  "dependencies": {
+    "tree-sitter": "^0.15.9",
+    "tree-sitter-javascript": "^0.15.1"
+  }
 }
