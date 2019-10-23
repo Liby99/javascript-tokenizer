@@ -116,7 +116,7 @@ fn token_to_string<'a>(token: Token) -> String {
     Token::RSquare => String::from("]"),
     Token::Star => String::from("*"),
     Token::StarAssign => String::from("*="),
-    Token::StringLiteral(s) => s,
+    Token::StringLiteral(s) => format!("\"{}\"", s),
     Token::Template(s) => s,
     Token::Tilde => String::from("~"),
     Token::TripleAssign => String::from("==="),
