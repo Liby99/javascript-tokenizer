@@ -34,7 +34,7 @@ dependencies = [
 [[package]]
 name = "javascript_lexer"
 version = "0.1.7"
-source = "registry+https://github.com/rust-lang/crates.io-index"
+source = "git+https://github.com/Liby99/javascript-lexer.git#43b660dc1c23ac1e90048e00de2b5012f9eeaefa"
 dependencies = [
  "internship 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "phf 0.7.24 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -227,7 +227,7 @@ dependencies = [
 name = "tokenize-js"
 version = "0.1.0"
 dependencies = [
- "javascript_lexer 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
+ "javascript_lexer 0.1.7 (git+https://github.com/Liby99/javascript-lexer.git)",
 ]
 
 [[package]]
@@ -260,7 +260,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum cloudabi 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "ddfc5b9aa5d4507acaf872de71051dfd0e309860e88966e1051e462a077aac4f"
 "checksum fuchsia-cprng 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "a06f77d526c1a601b7c4cdd98f54b5eaabffc14d5f2f0296febdc7f357c6d3ba"
 "checksum internship 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = "b75b80c06d9124692b2927086ed75c8721d4061f9c159d9675d3f6d63729b597"
-"checksum javascript_lexer 0.1.7 (registry+https://github.com/rust-lang/crates.io-index)" = "779d997028ff2070a60c402c914de747aa041633e267b0b049f136adbc6f682a"
+"checksum javascript_lexer 0.1.7 (git+https://github.com/Liby99/javascript-lexer.git)" = "<none>"
 "checksum libc 0.2.65 (registry+https://github.com/rust-lang/crates.io-index)" = "1a31a0627fdf1f6a39ec0dd577e101440b7db22672c0901fe00a9a6fbb5c24e8"
 "checksum phf 0.7.24 (registry+https://github.com/rust-lang/crates.io-index)" = "b3da44b85f8e8dfaec21adae67f95d93244b2ecf6ad2a692320598dcc8e6dd18"
 "checksum phf_generator 0.7.24 (registry+https://github.com/rust-lang/crates.io-index)" = "09364cc93c159b8b06b1f4dd8a4398984503483891b0c26b867cf431fb132662"
