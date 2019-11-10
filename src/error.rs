@@ -6,7 +6,7 @@ pub enum Error {
     /// Lexer failed to process all input
     LexingIncomplete,
     /// Lexer failed for unknow reasons
-    InternalError(Box<error::Error>),
+    InternalError(Box<dyn error::Error>),
 }
 
 impl fmt::Display for Error {
