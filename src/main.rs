@@ -31,10 +31,10 @@ use token::{Token, Number};
 fn num_to_string(num: Number) -> String {
   match (num.integer, num.decimal, num.exponent) {
     (0, 0, _) => format!("0"),
-    (0, d, 0) => format!(".{}", d),
-    (i, 0, 0) => format!("{}", i),
+    (0, d, 1) => format!(".{}", d),
+    (i, 0, 1) => format!("{}", i),
     (0, d, e) => format!(".{}e{}", d, e),
-    (i, d, 0) => format!("{}.{}", i, d),
+    (i, d, 1) => format!("{}.{}", i, d),
     (i, 0, e) => format!("{}e{}", i, e),
     (i, d, e) => format!("{}.{}e{}", i, d, e),
   }
