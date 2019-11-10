@@ -355,9 +355,8 @@ pub fn parse(input: &str) -> Result<Vec<Token>, Error> {
         st = StateMachineWrapper::InputElementDiv(StateMachine::<InputElementDiv>::new());
         token_len = 0;
     }
-    Ok(tokens)
 
-    // Ok(vec![])
+    Ok(tokens)
 }
 
 #[inline]

@@ -4,9 +4,9 @@ use internship::IStr;
 #[derive(PartialEq, Debug, Clone, Copy)]
 pub struct Number {
     /// Whole part of number
-    pub integer: u32,
+    pub integer: u64,
     /// Decimal part of number
-    pub decimal: u32,
+    pub decimal: u64,
     /// Number behind E / e (exponent)
     pub exponent: i64,
     /// base of number
@@ -15,7 +15,7 @@ pub struct Number {
 
 impl Number {
     /// Create instance of js representaiton of number
-    pub fn new(integer: u32, decimal: u32, exponent: i64, base: u8) -> Self {
+    pub fn new(integer: u64, decimal: u64, exponent: i64, base: u8) -> Self {
         Self {
             integer,
             decimal,

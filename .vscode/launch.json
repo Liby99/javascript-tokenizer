@@ -62,19 +62,19 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Run on a.js",
+      "name": "Run on overflow.js",
       "cargo": {
         "args": [
           "run",
           "--",
-          "examples/a.js"
+          "examples/overflow.js"
         ],
         "filter": {
           "name": "tokenize-js",
           "kind": "bin"
         }
       },
-      "args": [],
+      "args": ["examples/overflow.js"],
       "cwd": "${workspaceFolder}"
     }
   ]

@@ -154,14 +154,24 @@ fn main() {
   let mut raw_token = false;
   let mut print_help = false;
   let mut preprocess = false;
+  let mut line = false;
+  let mut next_is_output = false;
+  let mut output = None;
   let mut maybe_file_path = None;
 
   for arg in &args[1..] {
-    match arg.as_str() {
-      "-r" | "--raw" => raw_token = true,
-      "-p" | "--preprocess" => preprocess = true,
-      "-h" | "--help" => print_help = true,
-      _ => if maybe_file_path.is_none() { maybe_file_path = Some(String::from(arg)) },
+    if next_is_output {
+      output = Some(String::from(arg));
+      next_is_output = false;
+    } else {
+      match arg.as_str() {
+        "-r" | "--raw" => raw_token = true,
+        "-p" | "--preprocess" => preprocess = true,
+        "-h" | "--help" => print_help = true,
+        "-o" | "--output" => next_is_output = true,
+        "-l" | "--line" => line = true,
+        _ => if maybe_file_path.is_none() { maybe_file_path = Some(String::from(arg)) },
+      }
     }
   }
 
@@ -191,11 +201,20 @@ fn main() {
               tokens
             };
 
-            // Print the tokens
-            if raw_token {
-              println!("{:?}", tokens);
+            // Get the output strings
+            let output_str = if raw_token {
+              format!("{:?}", tokens)
+            } else if line {
+              tokens.into_iter().map(token_to_string).collect::<Vec<_>>().join("\n")
             } else {
-              println!("{:?}", tokens.into_iter().map(token_to_string).collect::<Vec<_>>());
+              format!("{:?}", tokens.into_iter().map(token_to_string).collect::<Vec<_>>())
+            };
+
+            // Output the result
+            if let Some(output_file) = output {
+              fs::write(output_file, output_str).expect("Unable to write file");
+            } else {
+              println!("{}", output_str);
             }
           } else {
             eprintln!("Unable to tokenize");
