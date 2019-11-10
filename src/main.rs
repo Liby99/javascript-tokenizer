@@ -153,11 +153,13 @@ fn main() {
 
   let mut raw_token = false;
   let mut print_help = false;
+  let mut preprocess = false;
   let mut maybe_file_path = None;
 
   for arg in &args[1..] {
     match arg.as_str() {
       "-r" | "--raw" => raw_token = true,
+      "-p" | "--preprocess" => preprocess = true,
       "-h" | "--help" => print_help = true,
       _ => if maybe_file_path.is_none() { maybe_file_path = Some(String::from(arg)) },
     }
@@ -177,11 +179,19 @@ fn main() {
       if let Ok(full_path) = fs::canonicalize(&PathBuf::from(file_path.clone())) {
         if let Ok(file_content) = fs::read_to_string(full_path.clone()) {
           if let Ok(tokens) = Lexer::lex_tokens(format!("{}\n", file_content).as_str()) {
-            let tokens = tokens.into_iter().filter(|t| match t {
-              Token::LineTerminator => false,
-              Token::EOF => false,
-              _ => true
-            }).collect::<Vec<_>>();
+
+            // Do preprocess to filter out all line terminator/EOF if needed
+            let tokens = if preprocess {
+              tokens.into_iter().filter(|t| match t {
+                Token::LineTerminator => false,
+                Token::EOF => false,
+                _ => true
+              }).collect::<Vec<_>>()
+            } else {
+              tokens
+            };
+
+            // Print the tokens
             if raw_token {
               println!("{:?}", tokens);
             } else {
