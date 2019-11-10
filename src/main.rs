@@ -1,10 +1,32 @@
+#![feature(const_fn, box_syntax, pattern, proc_macro_hygiene)]
+#![warn(variant_size_differences)]
+
+#[cfg(test)]
+#[macro_use]
+extern crate pretty_assertions;
+#[macro_use]
+extern crate phf;
+
+pub mod token;
+#[macro_use]
+pub mod macros;
+pub mod equivalence;
+pub mod error;
+pub mod internship { extern crate internship; pub use internship::*; }
+pub mod identifier;
+pub mod number;
+pub mod state;
+pub mod state_machine;
+pub mod string;
+
 use std::env;
 use std::fs;
 use std::path::PathBuf;
 
-extern crate javascript_lexer;
+mod lexer;
 
-use javascript_lexer::{Lexer, token::{Token, Number}};
+use lexer::Lexer;
+use token::{Token, Number};
 
 fn num_to_string(num: Number) -> String {
   match (num.integer, num.decimal, num.exponent) {
@@ -145,15 +167,21 @@ fn main() {
     println!("Javascript Tokenizer");
     println!("Will by default print out the JSON format string array containing tokens");
     println!("Usage:");
-    println!("\ttokenize [-r|--raw] [-h|--help] file.js");
+    println!("\ttokenize [-r|--raw] [-p|--preprocess] [-h|--help] file.js");
     println!("Options:");
     println!("\t-r | --raw:\tIf enabled, print out the raw tokens instead of JS tokens");
+    println!("\t-p | --preprocess:\tIf enabled, will filter out all new-line tokens");
     println!("\t-h | --help:\tPrint out this help message");
   } else {
     if let Some(file_path) = maybe_file_path {
       if let Ok(full_path) = fs::canonicalize(&PathBuf::from(file_path.clone())) {
         if let Ok(file_content) = fs::read_to_string(full_path.clone()) {
-          if let Ok(tokens) = Lexer::lex_tokens(file_content.as_str()) {
+          if let Ok(tokens) = Lexer::lex_tokens(format!("{}\n", file_content).as_str()) {
+            let tokens = tokens.into_iter().filter(|t| match t {
+              Token::LineTerminator => false,
+              Token::EOF => false,
+              _ => true
+            }).collect::<Vec<_>>();
             if raw_token {
               println!("{:?}", tokens);
             } else {

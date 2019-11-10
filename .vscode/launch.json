@@ -1,0 +1,81 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'tokenize-js'",
+      "cargo": {
+        "args": [
+          "build",
+          "--bin=tokenize-js",
+          "--package=tokenize-js"
+        ],
+        "filter": {
+          "name": "tokenize-js",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'tokenize-js'",
+      "cargo": {
+        "args": [
+          "test",
+          "--no-run",
+          "--bin=tokenize-js",
+          "--package=tokenize-js"
+        ],
+        "filter": {
+          "name": "tokenize-js",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Run on input.js",
+      "cargo": {
+        "args": [
+          "run",
+          "--",
+          "examples/input.js"
+        ],
+        "filter": {
+          "name": "tokenize-js",
+          "kind": "bin"
+        }
+      },
+      "args": ["examples/input.js"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Run on a.js",
+      "cargo": {
+        "args": [
+          "run",
+          "--",
+          "examples/a.js"
+        ],
+        "filter": {
+          "name": "tokenize-js",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

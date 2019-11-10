@@ -1,0 +1,12 @@
+[package]
+name = "tokenize-js"
+version = "0.1.0"
+authors = ["Liby Lee <liby99@icloud.com>"]
+edition = "2018"
+
+[dependencies]
+internship = "0.6.0"
+phf = { version = "0.7.24", features = ["macros"]}
+
+[dev-dependencies]
+pretty_assertions = "0.5"
